@@ -1,0 +1,24 @@
+{
+  "name": "@raphaelbgr/subproc-safe",
+  "version": "0.1.0",
+  "description": "Safe subprocess wrapper for Node.js: mandatory timeout, tree-kill, TTL cache + single-flight, GPU query, non-blocking leak reporting.",
+  "type": "module",
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js"
+  },
+  "dependencies": {
+    "execa": "^9.5.1",
+    "tree-kill": "^1.2.2"
+  },
+  "optionalDependencies": {
+    "nvidia-smi-gpu": "^0.4.0"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT"
+}
