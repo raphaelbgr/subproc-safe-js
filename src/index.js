@@ -123,6 +123,58 @@ export async function runCached(args, opts = {}) {
   return await slot.pending;
 }
 
+/**
+ * Return true iff an unexpired cached entry exists for (args, cwd).
+ * Matches any cacheKey — returns true if ANY entry for (args, cwd) is live.
+ */
+export function wasCached(args, cwd = undefined) {
+  const prefix = JSON.stringify([args, cwd || null]);
+  const now = Date.now();
+  for (const [key, entry] of _cache) {
+    const parsed = JSON.parse(key);
+    if (JSON.stringify([parsed[0], parsed[1]]) === prefix) {
+      if (entry.value && now < entry.expiresAt) return true;
+    }
+  }
+  return false;
+}
+
+/**
+ * Drop the cached entry for (args, cwd, cacheKey=null). No-op if absent.
+ */
+export function invalidate(args, cwd = undefined) {
+  const key = JSON.stringify([args, cwd || null, null]);
+  const entry = _cache.get(key);
+  if (entry) {
+    entry.value = null;
+    entry.expiresAt = 0;
+  }
+}
+
+/**
+ * Drop every cached entry whose argv starts with argPrefix.
+ */
+export function invalidatePrefix(argPrefix) {
+  for (const [key, entry] of _cache) {
+    const parsed = JSON.parse(key);
+    const argv = parsed[0];
+    if (argPrefix.every((p, i) => argv[i] === p)) {
+      entry.value = null;
+      entry.expiresAt = 0;
+    }
+  }
+}
+
+/**
+ * Drop all cached entries. For tests.
+ */
+export function clearCache() {
+  for (const entry of _cache.values()) {
+    entry.value = null;
+    entry.expiresAt = 0;
+  }
+}
+
 export function _resetCacheForTests() {
   _cache.clear();
 }

@@ -1,6 +1,6 @@
 {
   "name": "@raphaelbgr/subproc-safe",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Safe subprocess wrapper for Node.js: mandatory timeout, tree-kill, TTL cache + single-flight, GPU query, non-blocking leak reporting.",
   "type": "module",
   "main": "src/index.js",
