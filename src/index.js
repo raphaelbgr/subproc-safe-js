@@ -36,6 +36,7 @@ export async function run(args, opts = {}) {
       env,
       shell: false,
       stdio: ['ignore', 'pipe', 'pipe'],
+      windowsHide: true,
     });
 
     let stdout = '';

@@ -20,5 +20,10 @@
   "engines": {
     "node": ">=20"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "files": ["src", "README.md", "LICENSE"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raphaelbgr/subproc-safe-js.git"
+  }
 }
