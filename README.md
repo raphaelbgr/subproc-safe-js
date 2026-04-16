@@ -2,6 +2,14 @@
 
 Safe subprocess wrapper for Node.js. Always-timeout, tree-kill, TTL cache + single-flight, optional GPU query, non-blocking leak reporting.
 
+## Install
+
+Not published to npm. Pin to a git tag for reproducibility.
+
+```
+npm install github:raphaelbgr/subproc-safe-js#v0.1.1
+```
+
 ```js
 import { run, runCached, gpuQuery, LeakReportClient } from '@raphaelbgr/subproc-safe';
 
